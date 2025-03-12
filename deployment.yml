@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: flask-greeter
-        image: your-flask-image
+        image: derjudge/flask-greeter:latest
         resources:
           limits:
             memory: "128Mi"

@@ -1,0 +1,4 @@
+.venv/
+.idea/
+k8s/
+.gitignore

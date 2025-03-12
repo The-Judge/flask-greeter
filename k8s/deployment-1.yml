@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-greeter
+  name: flask-greeter-1
 spec:
   selector:
     matchLabels:
-      app: flask-greeter
+      app: flask-greeter-1
   template:
     metadata:
       labels:
-        app: flask-greeter
+        app: flask-greeter-1
     spec:
       containers:
-      - name: flask-greeter
+      - name: flask-greeter-1
         image: derjudge/flask-greeter:latest
         resources:
           limits:
@@ -20,3 +20,6 @@ spec:
             cpu: "200m"
         ports:
         - containerPort: 5000
+        env:
+          - name: HELLO_NAME
+            value: flask-greeter-1

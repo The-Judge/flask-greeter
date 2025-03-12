@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-greeter
+spec:
+  selector:
+    matchLabels:
+      app: flask-greeter
+  template:
+    metadata:
+      labels:
+        app: flask-greeter
+    spec:
+      containers:
+      - name: flask-greeter
+        image: your-flask-image
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 5000

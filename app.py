@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def hello_world():
+def hello_world(path):
     return f'Hello from {os.getenv("HELLO_NAME", "Flask")}, serving "{request.url}"!'
 
 

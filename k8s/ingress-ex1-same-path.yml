@@ -1,0 +1,33 @@
+# If paths are the same with your rule and backend service, then you don't
+# have to specify a rewrite rule and the path for the backend service is
+# sufficient.
+# If paths are different, consider using `nginx.ingress.kubernetes.io/rewrite-target`
+# annotation.
+#
+# Example 1 - Paths are equal
+# Access to http://example.com/ should go to service example-com:80/
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flask-greeter-1-same-path
+  annotations:
+    # Needs to have 'allowSnippetAnnotations: true' set in Ingress
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      expires off;
+      add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
+    # Link to the ConfigMap you applied "custom-headers-configMap.yml" to
+    #nginx.ingress.kubernetes.io/custom-headers: <my-namespace>/custom-headers-configmap
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: example-com
+                port:
+                  number: 80

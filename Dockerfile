@@ -1,6 +1,8 @@
 FROM python:3.14-alpine
 WORKDIR /app
 
+COPY Pipfile* ./
+
 RUN pip install --root-user-action ignore --upgrade --no-cache-dir pip && \
     pip install --root-user-action ignore --no-cache-dir pipenv && \
     pipenv sync --clear
